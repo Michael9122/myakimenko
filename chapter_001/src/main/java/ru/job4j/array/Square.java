@@ -1,7 +1,7 @@
 package ru.job4j.array;
 
 /**
- * Класс для создания шахматной доски в псевдографике.
+ * Класс для создания и заполнения массива.
  * @author Michael Yakimenko (Mixail912@gmail.com)
  * @since 10.02.2018
  * @version 1

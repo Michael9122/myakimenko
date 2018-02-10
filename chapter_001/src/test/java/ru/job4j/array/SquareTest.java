@@ -6,7 +6,6 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Класс для создания шахматной доски в псевдографике.
  * @author Michael Yakimenko (Mixail912@gmail.com)
  * @since 10.02.2018
  * @version 1
