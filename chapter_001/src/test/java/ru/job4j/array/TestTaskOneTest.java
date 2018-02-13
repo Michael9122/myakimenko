@@ -20,8 +20,6 @@ public class TestTaskOneTest {
     @Test
     public void whenFoundWordThenTrue() {
         TestTaskOne test = new TestTaskOne();
-        String origin = "Привет";
-        String sub = "иве";
         boolean result = test.contains("Привет", "иве");
         assertThat(result, is(true));
     }
@@ -33,9 +31,7 @@ public class TestTaskOneTest {
     @Test
     public void whenDoNotFoundWordThenFalse() {
         TestTaskOne test = new TestTaskOne();
-        String origin = "Привет";
-        String sub = "Абв";
-        boolean result = test.contains(origin, sub);
+        boolean result = test.contains("Привет", "Абв");
         assertThat(result, is(false));
     }
 }
