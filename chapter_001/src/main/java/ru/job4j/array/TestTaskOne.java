@@ -18,10 +18,17 @@ public class TestTaskOne {
         char[] word = origin.toCharArray();
         char[] wordInWord = sub.toCharArray();
         boolean result = false;
-        for (int i = 0; i < word.length - 1; i++) {
-            for (int j = 0; j < wordInWord.length - 1; j++) {
-                if (wordInWord[j] == word[i + j]) {
-                    result = true;
+        int count = 0;
+        for (int i = 0; i != word.length; i++) {
+            for (int j = 0; j  != wordInWord.length; j++) {
+                if (wordInWord[j] == word[i]) {
+                    i++;
+                    count ++;
+                    if (count == wordInWord.length) {
+                        result = true;
+                    }
+                } else {
+                    count = 0;
                 }
             }
         }
