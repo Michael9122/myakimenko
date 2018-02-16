@@ -20,16 +20,15 @@ public class TestTaskOne {
         boolean result = false;
         int count = 0;
         for (int i = 0; i != word.length; i++) {
-            for (int j = 0; j  != wordInWord.length; j++) {
+            for (int j = 0; j != wordInWord.length; j++) {
                 if (wordInWord[j] == word[i]) {
                     i++;
-                    count ++;
-                    if (count == wordInWord.length) {
-                        result = true;
-                    }
-                } else {
-                    count = 0;
+                    count++;
                 }
+            }
+            if (count == wordInWord.length) {
+                result = true;
+                break;
             }
         }
         return result;
