@@ -9,7 +9,7 @@ package ru.job4j.array;
 public class Square {
 
     /**
-     * Method paint.
+     * Заполнение масива.
      * @param bound натуральное число.
      * @return Массив.
      */

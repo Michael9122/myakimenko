@@ -1,5 +1,10 @@
 package ru.job4j.condition;
 
+/**
+ * Класс для вычесления расстояния между точками в системе координат.
+ * @author Michael Yakimenko (Mixail912@gmail.com)
+ * @version 1
+ */
 public class Point {
     private int x;
     private int y;
@@ -8,12 +13,22 @@ public class Point {
         this.x = x;
         this.y = y;
     }
+
+    /**
+     * Вычесления расстояния.
+     * @param that точки.
+     * @return расстояние.
+     */
     public double distanceTo(Point that) {
         return Math.sqrt(
                 Math.pow(this.x - that.x, 2) + Math.pow(this.y - that.y, 2)
         );
     }
 
+    /**
+     * Ввод точек.
+     * @param args
+     */
     public static void main(String[] args) {
         Point a = new Point(2, 4);
         Point b = new Point(4, 3);

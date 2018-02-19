@@ -10,6 +10,7 @@ import static org.junit.Assert.assertThat;
  * @version 1
  */
 public class DummyBotTest {
+
     @Test
     public void whenGreetBot() {
         DummyBot bot = new DummyBot();

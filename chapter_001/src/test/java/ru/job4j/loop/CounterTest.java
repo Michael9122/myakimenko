@@ -11,6 +11,7 @@ import static org.junit.Assert.assertThat;
  * @version 1
  */
 public class CounterTest {
+
     /**
      * Тест класса.
      * при вызове метода с параметрами 1, 10

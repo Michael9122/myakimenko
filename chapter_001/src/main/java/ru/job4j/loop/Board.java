@@ -9,7 +9,7 @@ package ru.job4j.loop;
 public class Board {
 
     /**
-     * Method paint.
+     * Создание шахматной доски.
      * @param width ширина достки.
      * @param height это высота доски.
      */

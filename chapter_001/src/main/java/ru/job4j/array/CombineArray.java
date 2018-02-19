@@ -9,16 +9,16 @@ package ru.job4j.array;
 public class CombineArray {
 
     /**
-     * удаление дубликатов.
-     * @param arrayOne массив.
-     * @param arrayTwo массив.
+     * Слияние.
+     * @param arrayOne первый массив.
+     * @param arrayTwo второй массив.
      * @return Массив.
      */
     public int[] combine(int[] arrayOne, int[] arrayTwo) {
         int[] arrayThree = new int[arrayOne.length + arrayTwo.length];
         int indexOne = 0, indexTwo = 0;
-        for(int i = 0; i < arrayThree.length; i++) {
-            if(indexTwo < arrayTwo.length && indexOne < arrayOne.length) {
+        for (int i = 0; i < arrayThree.length; i++) {
+            if (indexTwo < arrayTwo.length && indexOne < arrayOne.length) {
                 if (arrayOne[indexOne] > arrayTwo[indexTwo]) {
                     arrayThree[i] = arrayTwo[indexTwo++];
                 } else {

@@ -17,7 +17,7 @@ public class CombineArrayTest {
      * Проверяет слияние массивов.
      */
     @Test
-    public void WhenCombineTwoArraysThenCreateAnotherArray () {
+    public void whenCombineTwoArraysThenCreateAnotherArray() {
         CombineArray test = new CombineArray();
         int[] arrayOne = {1, 3, 4, 6, 21};
         int[] arrayTwo = {2, 5, 7, 8};

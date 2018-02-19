@@ -9,7 +9,7 @@ package ru.job4j.array;
 public class TestTaskOne {
 
     /**
-     * Method contains.
+     * Поиск слова.
      * @param origin Your name.
      * @param sub Your name.
      * @return true или false.

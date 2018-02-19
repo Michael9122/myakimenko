@@ -11,6 +11,7 @@ import static org.junit.Assert.assertThat;
  * @version 1
  */
 public class FactorialTest {
+
     /**
      * Тест класса.
      * вычисление факториала числа 5
@@ -22,6 +23,7 @@ public class FactorialTest {
         int result = test.calc(5);
         assertThat(result, is(120));
     }
+
     /**
      * Тест класса.
      * вычисление факториала числа 0

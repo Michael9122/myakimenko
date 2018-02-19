@@ -1,7 +1,7 @@
 package ru.job4j.array;
 
 /**
- * Класс для создания шахматной доски в псевдографике.
+ * Класс для поиска элемента в массиве.
  * @author Michael Yakimenko (Mixail912@gmail.com)
  * @since 10.02.2018
  * @version 1
@@ -9,7 +9,7 @@ package ru.job4j.array;
 public class FindLoop {
 
     /**
-     * Method paint.
+     * Поиск элемента.
      * @param data массив.
      * @param el индекс элемента массива.
      * @return Массив.

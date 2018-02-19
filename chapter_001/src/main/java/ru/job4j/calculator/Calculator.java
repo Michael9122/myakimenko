@@ -1,5 +1,11 @@
 package ru.job4j.calculator;
 
+/**
+ * Класс для сложения, вычетания, умножения и деления.
+ * @author Michael Yakimenko (Mixail912@gmail.com)
+ * @since 11.02.2018
+ * @version 1
+ */
 public class Calculator {
     private double result;
 

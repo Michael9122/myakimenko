@@ -7,6 +7,7 @@ import static org.junit.Assert.assertThat;
 
 
 public class MaxTest {
+
     @Test
     public void whenFirstLessSecondThenSecond() {
         Max maxOne = new Max();
