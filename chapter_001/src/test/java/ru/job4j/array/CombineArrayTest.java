@@ -25,4 +25,19 @@ public class CombineArrayTest {
         int[] result = test.combine(arrayOne, arrayTwo);
         assertThat(result, is(expectArray));
     }
+
+    /**
+     * Тест класса.
+     * Проверяет слияние массивов.
+     */
+    @Test
+    public void whenCombineTwoArraysThenCreateAnotherArray2() {
+        CombineArray test = new CombineArray();
+        int[] arrayOne = {2, 21, 34, 56};
+        int[] arrayTwo = {7, 43, 54, 120};
+        int[] expectArray = {2, 7, 21, 34, 43, 54, 56, 120};
+        int[] result = test.combine(arrayOne, arrayTwo);
+        assertThat(result, is(expectArray));
+    }
+
 }
