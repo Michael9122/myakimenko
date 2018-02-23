@@ -1,19 +1,39 @@
 package ru.job4j.Tracker;
 
+/**
+ * @author Michael Yakimenko (Mixail912@gmail.com)
+ * @since 24.02.2018
+ * @version 1
+ */
 public class StartUI {
     /**
      * Константа меню для добавления новой заявки.
      */
     private static final String ADD = "0";
 
+    /**
+     * Константа меню для поиска всех заявок.
+     */
     private static final String ShowAll = "1";
 
+    /**
+     * Константа меню для редактирования заявки.
+     */
     private static final String Edit = "2";
 
+    /**
+     * Константа меню для удаления заявки.
+     */
     private static final String Delete = "3";
 
+    /**
+     * Константа меню для поиска заявки по id.
+     */
     private static final String FindById = "4";
 
+    /**
+     * Константа меню для поиска заявки по имени.
+     */
     private static final String FindByName = "5";
     /**
      * Константа для выхода из цикла.
@@ -65,6 +85,9 @@ public class StartUI {
         }
     }
 
+    /**
+     * Метод реализует редактирование заявки.
+     */
     private void replaceItem() {
         System.out.println("------------ Изменение заявки --------------");
         String id = this.input.ask("Введите id старой заявки заявки :");
@@ -75,6 +98,9 @@ public class StartUI {
         System.out.println("------------ Новая заявка с getId : " + item.getId() + "-----------");
     }
 
+    /**
+     * Метод реализует поиск заявки по имени.
+     */
     private void findByName() {
         System.out.println("------------ Поиск заявки по имени --------------");
         String name = this.input.ask("Введите имя заявки :");
@@ -84,6 +110,9 @@ public class StartUI {
         }
     }
 
+    /**
+     * Метод реализует поиск заявки по id.
+     */
     private void findById() {
         System.out.println("------------ Поиск заявки по id --------------");
         String id = this.input.ask("Введите id заявки :");
@@ -91,6 +120,9 @@ public class StartUI {
         System.out.println("Заявка: " + item.getName());
     }
 
+    /**
+     * Метод реализует удаление заявки.
+     */
     private void deleteItem() {
         System.out.println("------------ Удаление заявки --------------");
         String id = this.input.ask("Введите id заявки :");
@@ -99,6 +131,9 @@ public class StartUI {
         System.out.println("------------ Заявка удалена -----------");
     }
 
+    /**
+     * Метод реализует поиск всех заявок.
+     */
     private void showItem() {
         System.out.println("------------ Показать все заявки --------------");
         Item[] items = tracker.findAll();
