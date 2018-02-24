@@ -45,7 +45,7 @@ public class TrackerTest {
      * Поиск по названию.
      */
     @Test
-    public void whenFindByNameThenReturnName () {
+    public void whenFindByNameThenReturnName() {
         Tracker tracker = new Tracker();
         Item item = new Item("test1","testDescription",123L);
         tracker.add(item);

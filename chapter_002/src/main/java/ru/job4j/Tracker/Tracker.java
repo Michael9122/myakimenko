@@ -40,7 +40,8 @@ public class Tracker {
      */
     public void replace(String id, Item item) {
         for (int index = 0; index != this.items.length; index++) {
-            if (this.items[index].getId().equals(id)) {
+            if (items[index] != null && this.items[index].getId().equals(id)) {
+                item.setId(id);
                 this.items[index] = item;
                 break;
             }
@@ -53,7 +54,7 @@ public class Tracker {
      */
     public void delete(String id) {
         for (int index = 0; index != this.items.length; index++) {
-            if (this.items[index].getId().equals(id)) {
+            if (items[index] != null && this.items[index].getId().equals(id)) {
                 this.position = index;
                 break;
             }
