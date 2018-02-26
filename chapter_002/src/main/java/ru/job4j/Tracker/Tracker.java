@@ -84,11 +84,12 @@ public class Tracker {
      * @return массив.
      */
     public Item[] findByName(String key) {
-        Item[] result = new Item[items.length];
+        Item[] result = new Item[position];
         int count = 0;
         for (Item item : items) {
             if (item != null && item.getName().equals(key)) {
                 result[count] = item;
+                count++;
             }
         }
         return result;
@@ -99,15 +100,11 @@ public class Tracker {
      * @return result.
      */
     public Item[] findAll() {
-        Item[] array = new Item[items.length];
-        int count = 0;
-        for (Item item : items) {
-            if (item != null) {
-                array[count] = item;
-                count++;
-            }
+        Item[] result = new Item[this.position];
+        for (int i = 0; i != this.position; i++) {
+            result[i] = this.items[i];
         }
-        return array;
+        return result;
     }
 
     /**
