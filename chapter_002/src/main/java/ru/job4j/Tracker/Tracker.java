@@ -1,4 +1,4 @@
-package ru.job4j.Tracker;
+package ru.job4j.tracker;
 
 import java.util.Random;
 
@@ -21,7 +21,7 @@ public class Tracker {
     /**
      * Поле для созданлия рандомных чисел.
      */
-    private static final Random rnd = new Random();
+    private static final Random RND = new Random();
 
     /**
      * Метод реализаущий добавление заявки в хранилище
@@ -116,7 +116,7 @@ public class Tracker {
      * @return Уникальный ключ.
      */
     private String generateId() {
-        return String.valueOf(System.currentTimeMillis() + rnd.nextInt());
+        return String.valueOf(System.currentTimeMillis() + RND.nextInt());
     }
 
 }

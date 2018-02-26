@@ -1,4 +1,4 @@
-package ru.job4j.Tracker;
+package ru.job4j.tracker;
 
 import org.junit.Test;
 
@@ -15,7 +15,7 @@ public class StartUITest {
      * Добавление заявки.
      */
     @Test
-    public void whenUserAddItemThenTrackerHasNewItemWithSameName(){
+    public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();
         Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});
         new StartUI(input, tracker).init();

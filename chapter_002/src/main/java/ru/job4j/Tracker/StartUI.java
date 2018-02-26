@@ -1,4 +1,4 @@
-package ru.job4j.Tracker;
+package ru.job4j.tracker;
 
 /**
  * @author Michael Yakimenko (Mixail912@gmail.com)
@@ -14,27 +14,27 @@ public class StartUI {
     /**
      * Константа меню для поиска всех заявок.
      */
-    private static final String ShowAll = "1";
+    private static final String SHOWALL = "1";
 
     /**
      * Константа меню для редактирования заявки.
      */
-    private static final String Edit = "2";
+    private static final String EDIT = "2";
 
     /**
      * Константа меню для удаления заявки.
      */
-    private static final String Delete = "3";
+    private static final String DELETE = "3";
 
     /**
      * Константа меню для поиска заявки по id.
      */
-    private static final String FindById = "4";
+    private static final String FINDBYID = "4";
 
     /**
      * Константа меню для поиска заявки по имени.
      */
-    private static final String FindByName = "5";
+    private static final String FINDBYNAME = "5";
     /**
      * Константа для выхода из цикла.
      */
@@ -69,15 +69,15 @@ public class StartUI {
             String answer = this.input.ask("Введите пункт меню : ");
             if (ADD.equals(answer)) {
                 this.createItem();
-            } else if (ShowAll.equals(answer)) {
+            } else if (SHOWALL.equals(answer)) {
                 this.showItem();
-            } else if (Edit.equals(answer)) {
+            } else if (EDIT.equals(answer)) {
                 this.replaceItem();
-            } else if (Delete.equals(answer)) {
+            } else if (DELETE.equals(answer)) {
                 this.deleteItem();
-            } else if (FindById.equals(answer)) {
+            } else if (FINDBYID.equals(answer)) {
                 this.findById();
-            } else if (FindByName.equals(answer)) {
+            } else if (FINDBYNAME.equals(answer)) {
                 this.findByName();
             } else if (EXIT.equals(answer)) {
                 exit = true;

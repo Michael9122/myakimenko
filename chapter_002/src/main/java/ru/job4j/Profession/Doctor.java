@@ -1,4 +1,4 @@
-package ru.job4j.Profession;
+package ru.job4j.profession;
 
 /**
  * @author Michael Yakimenko (Mixail912@gmail.com)
