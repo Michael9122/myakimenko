@@ -6,40 +6,40 @@ package ru.job4j.tracker;
  * @version 1
  */
 public class StartUI {
-    /**
+    /*
      * Константа меню для добавления новой заявки.
-     */
+
     private static final String ADD = "0";
 
-    /**
+
      * Константа меню для поиска всех заявок.
-     */
+
     private static final String SHOWALL = "1";
 
-    /**
+
      * Константа меню для редактирования заявки.
-     */
+
     private static final String EDIT = "2";
 
-    /**
+
      * Константа меню для удаления заявки.
-     */
+
     private static final String DELETE = "3";
 
-    /**
+
      * Константа меню для поиска заявки по id.
-     */
+
     private static final String FINDBYID = "4";
 
-    /**
+
      * Константа меню для поиска заявки по имени.
-     */
+
     private static final String FINDBYNAME = "5";
-    /**
+
      * Константа для выхода из цикла.
-     */
+
     private static final String EXIT = "6";
-    /**
+
      * Получение данных от пользователя.
      */
     private final Input input;
@@ -59,9 +59,7 @@ public class StartUI {
         this.tracker = tracker;
     }
 
-    /**
-     * Основой цикл программы.
-     */
+    /*
     public void init() {
         boolean exit = false;
         while (!exit) {
@@ -84,10 +82,21 @@ public class StartUI {
             }
         }
     }
+    */
 
-    /**
+    public void init() {
+        MenuTracker menu = new MenuTracker(this.input, this.tracker);
+        menu.fillActions();
+        do {
+            menu.show();
+            int key = Integer.valueOf(input.ask("Select: "));
+            menu.select(key);
+        } while (!"y".equals(this.input.ask("Exit? (y): ")));
+    }
+
+    /*
      * Метод реализует редактирование заявки.
-     */
+
     private void replaceItem() {
         System.out.println("------------ Изменение заявки --------------");
         String id = this.input.ask("Введите id старой заявки заявки :");
@@ -95,12 +104,12 @@ public class StartUI {
         String desc = this.input.ask("Введите описание новой заявки :");
         Item item = new Item(name, desc);
         this.tracker.replace(id, item);
-        System.out.println("------------ Новая заявка с getId : " + item.getId() + "-----------");
+        System.out.println("------------ Новая заявка с Id : " + item.getId() + "-----------");
     }
 
     /**
      * Метод реализует поиск заявки по имени.
-     */
+
     private void findByName() {
         System.out.println("------------ Поиск заявки по имени --------------");
         String name = this.input.ask("Введите имя заявки :");
@@ -112,7 +121,7 @@ public class StartUI {
 
     /**
      * Метод реализует поиск заявки по id.
-     */
+
     private void findById() {
         System.out.println("------------ Поиск заявки по id --------------");
         String id = this.input.ask("Введите id заявки :");
@@ -122,7 +131,7 @@ public class StartUI {
 
     /**
      * Метод реализует удаление заявки.
-     */
+
     private void deleteItem() {
         System.out.println("------------ Удаление заявки --------------");
         String id = this.input.ask("Введите id заявки :");
@@ -133,7 +142,7 @@ public class StartUI {
 
     /**
      * Метод реализует поиск всех заявок.
-     */
+
     private void showItem() {
         System.out.println("------------ Показать все заявки --------------");
         Item[] items = tracker.findAll();
@@ -144,7 +153,7 @@ public class StartUI {
 
     /**
      * Метод реализует добавленяи новый заявки в хранилище.
-     */
+
     private void createItem() {
         System.out.println("------------ Добавление новой заявки --------------");
         String name = this.input.ask("Введите имя заявки :");
