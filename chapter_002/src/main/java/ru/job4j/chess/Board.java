@@ -9,16 +9,14 @@ public class Board {
 
     private Figure[] figures = new Figure[32];
 
-    private int numberOfFigures = 0;
-
-    private Cell[] cells = new Cell[64];
+    private int number = 0;
 
     /**
      * Добавление фигуры на доску.
      * @param figure
      */
     public void add(Figure figure) {
-        figures[numberOfFigures++] = figure;
+        this.figures[number++] = figure;
     }
 
     /**
@@ -39,31 +37,33 @@ public class Board {
         boolean findFigure = false;
         int index = 0;
 
-        for (Figure figure : figures) {
-            if (figure != null) {
-                if (figure.position.getX() == source.getX() && figure.position.getY() == source.getY()) {
-                    findFigure = true;
-                    index++;
-                    break;
-                } else {
-                    throw new FigureNotFoundException("Фигура не найдена.");
-                }
+        for (int i = 0; i < figures.length - 1; i++) {
+            if (figures[i] != null && source.equals(figures[i].position)) {
+                index = i;
+                findFigure = true;
+                break;
             }
         }
         if (findFigure) {
-            for (int i = 0; i <= figures.length; i++) {
-                if (figures[i].position.getY() != dest.getY() && figures[i].position.getX() != dest.getX()) {
-                    if (figures[index].way(source, dest) != null) {
-                        figures[index] = figures[index].copy(dest);
-                        result = true;
-                    } else {
-                        throw new ImpossibleMoveException("Фигура не может так ходить.");
+            if (figures[index].way(source, dest) != null) {
+                for (Cell way : figures[index].way(source, dest)) {
+                    for (int i = 0; i <= figures.length; i++) {
+                        if (figures[i] != null && (way.getX() == figures[i].position.getX()) && (way.getY() == figures[i].position.getY())) {
+                            throw new OccupiedWayException("Данная клетка уже занята.");
+                        } else {
+                            figures[index] = figures[index].copy(dest);
+                            result = true;
+                            break;
+                        }
                     }
-                } else {
-                    throw new OccupiedWayException("Данная клетка уже занята.");
                 }
+            } else {
+                throw new ImpossibleMoveException("Фигура не может так ходить.");
             }
+        } else {
+            throw new FigureNotFoundException("Фигура не найдена.");
         }
+
         return result;
     }
 }

@@ -1,5 +1,7 @@
 package ru.job4j.chess;
 
+import java.util.Arrays;
+
 /**
  * @author Michael Yakimenko (Mixail912@gmail.com)
  * @since 16.03.2018
@@ -21,20 +23,18 @@ public class Bishop extends Figure {
      */
     @Override
     public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
-        int count = 0;
-        int sourceX = source.getX();
-        int sourceY = source.getY();
-        int destX = dest.getX();
-        int destY = dest.getY();
-        if (Math.abs(sourceX - destX) == Math.abs(sourceY - destY)) {
-            Cell[] way = new Cell[Math.abs(sourceY - destY)];
-            for (int i = 1; i <= (Math.abs(sourceX - destX)); i++) {
-                way[count++] = new Cell(sourceX + (destX - sourceX), sourceY + (destY - sourceY));
-            }
-            return way;
-        } else {
-            throw new ImpossibleMoveException("Фигура не может туда пойти.");
+        Cell[] path = new Cell[7];
+        int moveX = source.getX();
+        int moveY = source.getY();
+        if (Math.abs(dest.getX() - source.getX()) != Math.abs(dest.getY() - source.getY())) {
+            throw new ImpossibleMoveException("Фигура не может так ходить.");
         }
+        moveX = dest.getX() > moveX ? ++moveX : --moveX;
+        moveY = dest.getY() > moveY ? ++moveY : --moveY;
+        for (int i = 0; i < Math.abs(dest.getX() - source.getX()); i++) {
+            path[i] = new Cell(moveX, moveY);
+        }
+        return Arrays.copyOf(path, Math.abs(dest.getX() - source.getX()));
     }
 
     /**
