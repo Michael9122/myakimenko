@@ -50,4 +50,19 @@ public class ConvertList {
         }
         return result;
     }
+
+    /**
+     * Этот метод добавляет лист массивов в один лист Integer.
+     * @param list лист массивов.
+     * @return один лист Integer.
+     */
+    public List<Integer> convert (List<int[]> list) {
+        List<Integer> result = new ArrayList<>();
+        for (int[] out : list) {
+            for (int in : out) {
+                result.add(in);
+            }
+        }
+        return result;
+    }
 }
