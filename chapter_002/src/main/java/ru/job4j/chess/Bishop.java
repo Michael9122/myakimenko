@@ -16,10 +16,10 @@ public class Bishop extends Figure {
      * Метод реализует движение слона.
      *  dest - задает ячейку, куда следует пойти. Если фигура может туда пойти. то Вернуть массив ячеек. которые должна пройти фигура.
      *  Если фигура туда пойти не может. выбросить исключение ImpossibleMoveException.
-     * @param source
-     * @param dest
-     * @return
-     * @throws ImpossibleMoveException
+     * @param source начальная позиция.
+     * @param dest конечная позиция.
+     * @return массив движения фигуры.
+     * @throws ImpossibleMoveException фигура не может так ходить.
      */
     @Override
     public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
@@ -39,8 +39,8 @@ public class Bishop extends Figure {
 
     /**
      * Метод создает фигуру с координатой dest.
-     * @param dest
-     * @return
+     * @param dest конеяная позиция.
+     * @return добавление фигуры на доску.
      */
     @Override
     public Figure copy(Cell dest) {
