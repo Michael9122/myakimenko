@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -11,12 +13,7 @@ public class Tracker {
     /**
      * Массив для хранение заявок.
      */
-    private final Item[] items = new Item[100];
-
-    /**
-     * Указатель ячейки для новой заявки.
-     */
-    private int position = 0;
+    private List<Item> items = new ArrayList<>();
 
     /**
      * Поле для созданлия рандомных чисел.
@@ -28,21 +25,23 @@ public class Tracker {
      * @param item новая заявка
      */
     public Item add(Item item) {
-        item.setId(this.generateId());
-        this.items[this.position++] = item;
+        this.items.add(item);
+        item.setId(generateId());
         return item;
     }
 
     /**
      * Метод заменяет ячейку в массиве.
-     * @param id
-     * @param item
+     * @param id id звявки.
+     * @param item новая заявка.
      */
     public void replace(String id, Item item) {
-        for (int index = 0; index != this.items.length; index++) {
-            if (items[index] != null && this.items[index].getId().equals(id)) {
+        for (Item index : items) {
+            if (index.getId().equals(id)) {
+                int i = this.items.indexOf(index);
+                items.remove(i);
                 item.setId(id);
-                this.items[index] = item;
+                this.items.set(i, item);
                 break;
             }
         }
@@ -50,21 +49,21 @@ public class Tracker {
 
     /**
      * Метод удаляет ячейку в массиве.
-     * @param id
+     * @param id id звявки.
      */
     public void delete(String id) {
-        for (int index = 0; index != this.items.length; index++) {
-            if (items[index] != null && this.items[index].getId().equals(id)) {
-                this.position = index;
+        for (Item j : items) {
+            if (j != null && j.getId().equals(id)) {
+                int i = items.indexOf(j);
+                items.remove(i);
                 break;
             }
         }
-        System.arraycopy(this.items, this.position + 1, this.items, this.position, this.items.length - 1 - this.position);
     }
 
     /**
      * Метод находит элемент по id.
-     * @param id
+     * @param id id звявки.
      * @return найденный резултат, либо null если результат не найден.
      */
     public Item findById(String id) {
@@ -80,16 +79,14 @@ public class Tracker {
 
     /**
      * Метод находит элемент по названию.
-     * @param key
+     * @param key Имя.
      * @return массив.
      */
-    public Item[] findByName(String key) {
-        Item[] result = new Item[position];
-        int count = 0;
+    public List<Item> findByName(String key) {
+        List<Item> result = new ArrayList<>();
         for (Item item : items) {
             if (item != null && item.getName().equals(key)) {
-                result[count] = item;
-                count++;
+                result.add(item);
             }
         }
         return result;
@@ -99,12 +96,8 @@ public class Tracker {
      * Метод findAll возвращает копию массива this.items без null элементов.
      * @return result.
      */
-    public Item[] findAll() {
-        Item[] result = new Item[this.position];
-        for (int i = 0; i != this.position; i++) {
-            result[i] = this.items[i];
-        }
-        return result;
+    public List<Item> findAll() {
+        return this.items;
     }
 
     /**
@@ -113,7 +106,7 @@ public class Tracker {
      * @return Уникальный ключ.
      */
     private String generateId() {
-        return String.valueOf(System.currentTimeMillis() + RND.nextInt());
+        return String.valueOf(System.currentTimeMillis() + RND.nextInt(100));
     }
 
 }

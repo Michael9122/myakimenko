@@ -18,12 +18,12 @@ public class ValidateInput implements Input {
         return this.input.ask(question);
     }
 
-    public int ask(String question, int[] range) {
+    public int ask(String question, int[] range){
         boolean invalid = true;
         int value = -1;
         do {
             try {
-                value = this.input.ask(question, range);
+                value = Integer.valueOf(this.input.ask(question, range));
                 invalid = false;
             } catch (MenuOutException moe) {
                 System.out.println("Please select key from menu.");

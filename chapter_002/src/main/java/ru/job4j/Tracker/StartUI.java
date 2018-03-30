@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.List;
+
 /**
  * @author Michael Yakimenko (Mixail912@gmail.com)
  * @since 24.02.2018
@@ -14,7 +16,7 @@ public class StartUI {
      */
     private final Tracker tracker;
 
-    private int[] ranges = new int[] {1, 2, 3, 4, 5, 6, 7};
+    private int[] ranges = new int[] {0, 1, 2, 3, 4, 5, 6};
 
     /**
      * Конструтор инициализирующий поля.
