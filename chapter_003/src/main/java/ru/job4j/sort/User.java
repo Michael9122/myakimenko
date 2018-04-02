@@ -1,5 +1,10 @@
 package ru.job4j.sort;
 
+/**
+ * @author Michael Yakimenko (Mixail912@gmail.com)
+ * @since 02.04.2018
+ * @version 1
+ */
 public class User implements Comparable<User> {
     private String name;
 
@@ -25,6 +30,6 @@ public class User implements Comparable<User> {
 
     @Override
     public String toString() {
-        return String.format("%s, %d лет", this.name, this.age);
+        return String.format("%s, %d age", this.name, this.age);
     }
 }
