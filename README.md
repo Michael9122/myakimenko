@@ -1,3 +1,6 @@
-# Репозиторий Михаила Якименко http://job4j.ru/
+[![Build Status](https://travis-ci.org/Michael9122/myakimenko.svg?branch=master)](https://travis-ci.org/Michael9122/myakimenko)
+[![codecov](https://codecov.io/gh/Michael9122/myakimenko/branch/master/graph/badge.svg)](https://codecov.io/gh/Michael9122/myakimenko)
 
- Я прохожу курс на сайте Job4j.ru и после прохождения курса планирую устроиться работать на должность junior developer. Устроиться на работу планирую не позднее октября 2018 года.
+Р РµРїРѕР·РёС‚РѕСЂРёР№ РњРёС…Р°РёР»Р° РЇРєРёРјРµРЅРєРѕ http://job4j.ru/
+
+РЇ РїСЂРѕС…РѕР¶Сѓ РєСѓСЂСЃ РЅР° СЃР°Р№С‚Рµ Job4j.ru Рё РїРѕСЃР»Рµ РїСЂРѕС…РѕР¶РґРµРЅРёСЏ РєСѓСЂСЃР° РїР»Р°РЅРёСЂСѓСЋ СѓСЃС‚СЂРѕРёС‚СЊСЃСЏ СЂР°Р±РѕС‚Р°С‚СЊ РЅР° РґРѕР»Р¶РЅРѕСЃС‚СЊ junior developer. РЈСЃС‚СЂРѕРёС‚СЊСЃСЏ РЅР° СЂР°Р±РѕС‚Сѓ РїР»Р°РЅРёСЂСѓСЋ РЅРµ РїРѕР·РґРЅРµРµ РѕРєС‚СЏР±СЂСЏ 2018 РіРѕРґР°.
