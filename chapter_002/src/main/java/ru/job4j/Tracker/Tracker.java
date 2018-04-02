@@ -36,15 +36,8 @@ public class Tracker {
      * @param item новая заявка.
      */
     public void replace(String id, Item item) {
-        for (Item index : items) {
-            if (index.getId().equals(id)) {
-                int i = this.items.indexOf(index);
-                items.remove(i);
-                item.setId(id);
-                this.items.set(i, item);
-                break;
-            }
-        }
+        items.set(items.indexOf(this.findById(id)), item);
+        item.setId(id);
     }
 
     /**

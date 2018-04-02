@@ -1,7 +1,5 @@
 package ru.job4j.tracker;
 
-import java.util.List;
-
 /**
  * @author Michael Yakimenko (Mixail912@gmail.com)
  * @since 24.02.2018
@@ -16,8 +14,6 @@ public class StartUI {
      */
     private final Tracker tracker;
 
-    private int[] ranges = new int[] {0, 1, 2, 3, 4, 5, 6};
-
     /**
      * Конструтор инициализирующий поля.
      * @param input ввод данных.
@@ -31,9 +27,13 @@ public class StartUI {
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         menu.fillActions();
+        int[] range = new int[menu.getRange()];
+        for (int i = 0; i < range.length; i++) {
+            range[i] = i;
+        }
         do {
             menu.show();
-            menu.select(input.ask("Select: ", ranges));
+            menu.select(input.ask("Please select action: ", range));
         } while (!"y".equals(this.input.ask("Exit? (y): ")));
     }
 
