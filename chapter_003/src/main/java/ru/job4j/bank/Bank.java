@@ -33,8 +33,8 @@ public class Bank {
      * @param account номер счета.
      */
     public void addAccountToUser(String passport, Account account) {
-        for(User i : users.keySet()) {
-            if(i.getPassport().equals(passport)) {
+        for (User i : users.keySet()) {
+            if (i.getPassport().equals(passport)) {
                 users.get(i).add(account);
             }
         }
@@ -46,8 +46,8 @@ public class Bank {
      * @param account номер счета.
      */
     public void deleteAccountFromUser(String passport, Account account) {
-        for(User i : users.keySet()) {
-            if(i.getPassport().equals(passport)) {
+        for (User i : users.keySet()) {
+            if (i.getPassport().equals(passport)) {
                 users.get(i).remove(account);
             }
         }
@@ -58,7 +58,7 @@ public class Bank {
      * @param passport паспорт.
      * @return счет пользователя.
      */
-    public List<Account> getUserAccounts (String passport) {
+    public List<Account> getUserAccounts(String passport) {
         List<Account> result = new ArrayList<>();
         for (User key : users.keySet()) {
             if (key.getPassport().equals(passport)) {
@@ -77,7 +77,7 @@ public class Bank {
      * @param amount сумма перевода.
      * @return вернуть true если перевод возможен, либо false если нет.
      */
-    public boolean transferMoney (String srcPassport, String srcRequisite, String destPassport, String dstRequisite, int amount) {
+    public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String dstRequisite, int amount) {
         boolean src = false;
         boolean dst = false;
         boolean trans = false;

@@ -5,7 +5,7 @@ package ru.job4j.bank;
  * @since 06.05.2018
  * @version 1
  */
-public class Account {
+public class Account extends Object {
     private int value;
     private String requisites;
 
