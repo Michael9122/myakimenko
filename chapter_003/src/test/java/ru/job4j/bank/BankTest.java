@@ -56,9 +56,7 @@ public class BankTest {
         bank.addAccountToUser("5520", accountTwo);
         boolean result = bank.transferMoney(
                 "5520",
-                "789",
                 "5520",
-                "456",
                 50
         );
         assertThat(result, is(true));
@@ -79,9 +77,7 @@ public class BankTest {
         bank.addAccountToUser("5510", accountTwo);
         boolean result = bank.transferMoney(
                 "5520",
-                "789",
                 "5510",
-                "456",
                 50
         );
         assertThat(result, is(true));
@@ -102,9 +98,7 @@ public class BankTest {
         bank.addAccountToUser("5510", accountTwo);
         boolean result = bank.transferMoney(
                 "5520",
-                "789",
                 "5510",
-                "456",
                 160
         );
         assertThat(result, is(false));
