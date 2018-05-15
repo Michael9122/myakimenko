@@ -67,7 +67,7 @@ public class BoardTest {
         try {
             board.move(cellSrc, cellDst);
         } catch (OccupiedWayException owe) {
-            assertThat(owe.getMessage(), is("Данная клетка уже занята."));
+            assertThat(owe.getMessage(), is("На пути есть другие фигуры."));
         }
     }
 }
