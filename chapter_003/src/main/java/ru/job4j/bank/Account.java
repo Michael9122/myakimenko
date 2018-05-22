@@ -24,12 +24,18 @@ public class Account extends Object {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Account account = (Account) o;
 
-        if (value != account.value) return false;
+        if (value != account.value) {
+            return false;
+        }
         return requisites.equals(account.requisites);
     }
 
