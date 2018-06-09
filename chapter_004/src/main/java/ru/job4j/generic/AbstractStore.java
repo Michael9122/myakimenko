@@ -79,7 +79,7 @@ public abstract class AbstractStore<T extends Base> implements Store<T> {
     @Override
     public T findById(String id) {
         Iterator<T> it = array.iterator();
-        while (it.hasNext()){
+        while (it.hasNext()) {
             T role = it.next();
             if (role.getId().equals(id)) {
                 return role;

@@ -5,7 +5,7 @@ package ru.job4j.generic;
  * @since 09.06.2018
  * @version 1
  */
-public class UserStore extends AbstractStore<User>{
+public class UserStore extends AbstractStore<User> {
 
     /**
      * Конструктор.
