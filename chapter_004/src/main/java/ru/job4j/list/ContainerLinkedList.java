@@ -40,7 +40,7 @@ public class ContainerLinkedList<E> implements Iterable<E> {
      * Добавление элемента в списаок.
      * @param item элемент которуй нужно добавить.
      */
-    public void add(E item){
+    public void add(E item) {
         final Node<E> l = last;
         final Node<E> newNode = new Node<>(l, item, null);
         last = newNode;
