@@ -37,6 +37,46 @@ public class ContainerLinkedList<E> implements Iterable<E> {
     }
 
     /**
+     * Убирает первый элемент листа.
+     * @param f первый элемент листа.
+     */
+    private E unlinkFirst(Node<E> f) {
+        // assert f == first && f != null;
+        final E element = f.item;
+        final Node<E> next = f.next;
+        f.item = null;
+        f.next = null; // help GC
+        first = next;
+        if (next == null)
+            last = null;
+        else
+            next.prev = null;
+        size--;
+        modCount++;
+        return element;
+    }
+
+    /**
+     * Убирает последний элемент листа.
+     * @param l последний элемент листа.
+     */
+    private E unlinkLast(Node<E> l) {
+        // assert l == last && l != null;
+        final E element = l.item;
+        final Node<E> prev = l.prev;
+        l.item = null;
+        l.prev = null; // help GC
+        last = prev;
+        if (prev == null)
+            first = null;
+        else
+            prev.next = null;
+        size--;
+        modCount++;
+        return element;
+    }
+
+    /**
      * Добавление элемента в списаок.
      * @param item элемент которуй нужно добавить.
      */
@@ -64,6 +104,24 @@ public class ContainerLinkedList<E> implements Iterable<E> {
             result = result.next;
         }
         return result.item;
+    }
+
+    /**
+     * Удаляет и возвращает первый элемент из листа.
+     * @return первый элемент листа.
+     */
+    public E pollFirst() {
+        final Node<E> f = first;
+        return (f == null) ? null : unlinkFirst(f);
+    }
+
+    /**
+     * Удаляет и возвращает последний элемент из листа.
+     * @return последний элемент листа.
+     */
+    public E pollLast() {
+        final Node<E> l = last;
+        return (l == null) ? null : unlinkLast(l);
     }
 
     @Override
