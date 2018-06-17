@@ -31,12 +31,6 @@ public class ContainerLinkedList<E> implements Iterable<E> {
     private int expectedModCount;
 
     /**
-     * Конструктор класса.
-     */
-    public ContainerLinkedList() {
-    }
-
-    /**
      * Убирает первый элемент листа.
      * @param f первый элемент листа.
      */
@@ -47,10 +41,11 @@ public class ContainerLinkedList<E> implements Iterable<E> {
         f.item = null;
         f.next = null; // help GC
         first = next;
-        if (next == null)
+        if (next == null) {
             last = null;
-        else
+        } else {
             next.prev = null;
+        }
         size--;
         modCount++;
         return element;
@@ -67,10 +62,11 @@ public class ContainerLinkedList<E> implements Iterable<E> {
         l.item = null;
         l.prev = null; // help GC
         last = prev;
-        if (prev == null)
+        if (prev == null) {
             first = null;
-        else
+        } else {
             prev.next = null;
+        }
         size--;
         modCount++;
         return element;
