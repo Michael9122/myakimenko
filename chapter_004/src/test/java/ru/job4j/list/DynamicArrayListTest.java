@@ -18,7 +18,7 @@ import static org.junit.Assert.assertThat;
 public class DynamicArrayListTest {
 
     private DynamicArrayList<Integer> list = new DynamicArrayList<>();
-    Iterator<Integer> it = list.iterator();
+
 
     @Before
     public void setUp() {
@@ -41,6 +41,7 @@ public class DynamicArrayListTest {
 
     @Test(expected = NoSuchElementException.class)
     public void shouldReturnPrimeNumbersOnly() {
+        Iterator<Integer> it = list.iterator();
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(1));
         assertThat(it.hasNext(), is(true));

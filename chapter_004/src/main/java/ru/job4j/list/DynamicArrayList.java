@@ -13,9 +13,9 @@ public class DynamicArrayList<E> implements Iterable<E> {
 
     private int empty = 10;
 
-    private int index = 0;
-
     private int modCount = 0;
+
+    private int size = 0;
 
     public DynamicArrayList() {
         this.elementData = new Object[empty];
@@ -25,8 +25,11 @@ public class DynamicArrayList<E> implements Iterable<E> {
      * Проверка заполнености массива.
      * @return true если массив заполнен не полностью, false если массив полностью заполен.
      */
-    private boolean checkEnpty() {
-        return (elementData.length - 1 == index && elementData.length >= empty) ? true : false;
+    private void checkEmpty() {
+        if (size == elementData.length) {
+            modCount++;
+            elementData = Arrays.copyOf(elementData, elementData.length * 2);
+        }
     }
 
     /**
@@ -34,13 +37,8 @@ public class DynamicArrayList<E> implements Iterable<E> {
      * @param value элемент.
      */
     public void add(E value) {
-        modCount++;
-        boolean result = checkEnpty();
-        if (result) {
-            elementData = Arrays.copyOf(elementData, elementData.length * 2);
-        }
-        elementData[index++] = value;
-
+        checkEmpty();
+        elementData[size++] = value;
     }
 
     /**
@@ -57,34 +55,38 @@ public class DynamicArrayList<E> implements Iterable<E> {
 
         return new Iterator<E>() {
 
-            private int cursor = 0;
+            int cursor;
+            int lastRet = -1;
+            int expectedModCount = modCount;
 
             @Override
             public boolean hasNext() {
-                return cursor != elementData.length;
+                return cursor != size;
             }
 
             @Override
             public E next() {
                 checkForComodification();
-                if (!hasNext()) {
+                int i = cursor;
+                if (i >= size) {
                     throw new NoSuchElementException();
                 }
-                if (cursor >= elementData.length) {
+                Object[] elementData = DynamicArrayList.this.elementData;
+                if (i >= elementData.length) {
                     throw new ConcurrentModificationException();
                 }
-                return (E) elementData[cursor++];
+                cursor = i + 1;
+                lastRet = i;
+                return (E) elementData[lastRet];
+            }
+            /**
+             * Проверка на то, что с момента создания итератора коллекция не подверглась структурному изменению.
+             */
+            final void checkForComodification() {
+                if (modCount != expectedModCount) {
+                    throw new ConcurrentModificationException();
+                }
             }
         };
-    }
-
-    /**
-     * Проверка на то, что с момента создания итератора коллекция не подверглась структурному изменению.
-     */
-    final void checkForComodification() {
-        int expectedModCount = modCount;
-        if (modCount != expectedModCount) {
-            throw new ConcurrentModificationException();
-        }
     }
 }
