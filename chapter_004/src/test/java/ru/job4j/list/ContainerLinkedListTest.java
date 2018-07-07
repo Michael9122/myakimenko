@@ -17,8 +17,6 @@ public class ContainerLinkedListTest {
 
     private ContainerLinkedList<Integer> list = new ContainerLinkedList<>();
 
-    private Iterator<Integer> it = list.iterator();
-
     @Before
     public void setUp() throws Exception {
         list.add(1);
@@ -37,6 +35,7 @@ public class ContainerLinkedListTest {
 
     @Test
     public void shouldReturn() {
+        Iterator<Integer> it = list.iterator();
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(1));
         assertThat(it.hasNext(), is(true));
@@ -50,6 +49,7 @@ public class ContainerLinkedListTest {
 
     @Test
     public void whenInvokeHasNextAndNextThenCheckTheGetResultsIsGoingToBeFalse() {
+        Iterator<Integer> it = list.iterator();
         assertThat(it.next(), is(1));
         assertThat(it.next(), is(2));
         assertThat(it.next(), is(3));

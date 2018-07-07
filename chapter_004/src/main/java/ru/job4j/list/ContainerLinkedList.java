@@ -28,8 +28,6 @@ public class ContainerLinkedList<E> implements Iterable<E> {
 
     private int modCount = 0;
 
-    private int expectedModCount;
-
     /**
      * Убирает первый элемент листа.
      * @param f первый элемент листа.
@@ -125,35 +123,37 @@ public class ContainerLinkedList<E> implements Iterable<E> {
 
         return new Iterator<E>() {
 
-            int count = 0;
+            private int expectedModCount = modCount;
+            private Node<E> current = first;
+            private Node<E> lastReturned;
+            private int nextIndex = 0;
 
-            E date;
-
+            @Override
             public boolean hasNext() {
-                return (count < size) && (last != null);
+                return nextIndex < size;
             }
 
+            @Override
             public E next() {
                 checkForComodification();
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                count++;
-                date = first.item;
-                first = first.next;
-                return date;
+                lastReturned = current;
+                current = current.next;
+                nextIndex++;
+                return lastReturned.item;
+            }
+            /**
+             * Проверка на то, что с момента создания итератора коллекция не подверглась структурному изменению.
+             */
+            private final void checkForComodification() {
+
+                if (modCount != expectedModCount) {
+                    throw new ConcurrentModificationException();
+                }
             }
         };
-    }
-
-    /**
-     * Проверка на то, что с момента создания итератора коллекция не подверглась структурному изменению.
-     */
-    private final void checkForComodification() {
-        expectedModCount = modCount;
-        if (modCount != expectedModCount) {
-            throw new ConcurrentModificationException();
-        }
     }
 
     private static class Node<E> {
