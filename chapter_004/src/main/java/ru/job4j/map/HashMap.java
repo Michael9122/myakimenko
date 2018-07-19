@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 public class HashMap<K, V> implements Iterable<HashMap.Entry<K, V>> {
 
-    private final int DEFAULT_INITIAL_CAPACITY = 16;
+    private final int capacity = 16;
 
     private Entry<K, V>[] table;
 
@@ -21,7 +21,7 @@ public class HashMap<K, V> implements Iterable<HashMap.Entry<K, V>> {
     private int modCount;
 
     public HashMap() {
-        this.table = new Entry[DEFAULT_INITIAL_CAPACITY];
+        this.table = new Entry[capacity];
     }
 
     /**
@@ -30,14 +30,14 @@ public class HashMap<K, V> implements Iterable<HashMap.Entry<K, V>> {
      * @return хеш-код объекта.
      */
     private static final int hash(Object key) {
-        int h;
-        return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+        int h = key.hashCode();
+        return (key == null) ? 0 : h ^ (h >>> 16);
     }
 
     /**
      * Увелечение размера таблицы.
      */
-    private Entry<K,V>[] resize() {
+    private Entry<K, V>[] resize() {
         Entry<K, V>[] oldTab = table;
         int oldCap = (oldTab == null) ? 0 : oldTab.length;
         Entry<K, V>[] newTab = new Entry[table.length * 2];
@@ -170,11 +170,15 @@ public class HashMap<K, V> implements Iterable<HashMap.Entry<K, V>> {
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
             Entry<?, ?> entry = (Entry<?, ?>) o;
-            return Objects.equals(key, entry.getKey()) &&
-                    Objects.equals(value, entry.getValue());
+            return Objects.equals(key, entry.getKey())
+                    && Objects.equals(value, entry.getValue());
         }
 
         @Override
