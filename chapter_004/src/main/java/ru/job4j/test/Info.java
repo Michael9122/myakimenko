@@ -7,34 +7,34 @@ package ru.job4j.test;
  */
 public class Info {
 
-    private int Insert;
-    private int Replace;
-    private int Delete;
+    private int insert;
+    private int replace;
+    private int delete;
 
     public Info(int insert, int replace, int delete) {
-        Insert = insert;
-        Replace = replace;
-        Delete = delete;
+        this.insert = insert;
+        this.replace = replace;
+        this.delete = delete;
     }
 
     public int getInsert() {
-        return Insert;
+        return insert;
     }
 
     public int getDelete() {
-        return Delete;
+        return delete;
     }
 
     public int getReplace() {
-        return Replace;
+        return replace;
     }
 
     @Override
     public String toString() {
-        return "Info{" +
-                "Insert=" + Insert +
-                ", Replace=" + Replace +
-                ", Delete=" + Delete +
-                '}';
+        return "Info{"
+                + "insert=" + insert
+                + ", replace=" + replace
+                + ", delete=" + delete
+                + '}';
     }
 }
