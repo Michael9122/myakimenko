@@ -29,13 +29,14 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
      */
     @Override
     public boolean add(E parent, E child) {
-        if (findBy(child) == null) {
-            return false;
+        boolean result = false;
+        if (findBy(parent).isPresent() && !findBy(child).isPresent()) {
+            findBy(parent).get().add(new Node<>(child));
+            modCount++;
+            size++;
+            result = true;
         }
-        findBy(parent).get().add(new Node<>(child));
-        modCount++;
-        size++;
-        return true;
+        return result;
     }
 
     /**
