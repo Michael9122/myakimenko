@@ -49,7 +49,7 @@ public class StoreTest {
     }
 
     @Test
-    public void add() {
+    public void insert() {
         current.add(new Store.User(4, "Nikola"));
         current.add(new Store.User(5, "Luba"));
         current.add(new Store.User(6, "Valera"));

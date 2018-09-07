@@ -1,6 +1,8 @@
 package ru.job4j.test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -18,18 +20,19 @@ public class Store {
      */
     Info diff(List<User> previous, List<User> current) {
         int insert, delete = 0, replace = 0;
-        int index;
-        for (User user : current) {
-            if (previous.contains(user)) {
-                index = current.indexOf(user);
-                if (!user.getName().equals(previous.get(index).getName()) & user.getId() == previous.get(index).getId()) {
-                    replace++;
-                }
-            }
-        }
+        Map<Integer, String> curr = new HashMap<>();
+        Map<Integer, String> prev = new HashMap<>();
         for (User user : previous) {
-            if (!current.contains(user)) {
+            prev.put(user.getId(), user.getName());
+        }
+        for (User user : current) {
+            curr.put(user.getId(), user.getName());
+        }
+        for (Integer user : prev.keySet()) {
+            if (!curr.keySet().contains(user)) {
                 delete++;
+            } else if (!prev.get(user).equals(curr.get(user))) {
+                replace++;
             }
         }
         insert = current.size() - (previous.size() - delete);
