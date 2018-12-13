@@ -22,7 +22,7 @@ public class RectangleMove implements Runnable {
     public void run() {
         int x = 3;
         int y = 5;
-        while (true) {
+        while (!Thread.currentThread().isInterrupted()) {
             this.rect.setX(this.rect.getX() + x);
             this.rect.setY(this.rect.getY() + y);
             if (this.rect.getX() >= limitX || this.rect.getX() <= 0) {
@@ -33,9 +33,8 @@ public class RectangleMove implements Runnable {
             }
             try {
                 Thread.sleep(50);
-
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
             }
         }
     }
