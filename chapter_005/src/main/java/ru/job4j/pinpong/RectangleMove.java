@@ -1,4 +1,4 @@
-package ru.job4j.threads;
+package ru.job4j.pinpong;
 
 import javafx.scene.shape.Rectangle;
 

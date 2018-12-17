@@ -1,4 +1,4 @@
-package ru.job4j.multithreading.jmm;
+package ru.job4j.jmm;
 
 /**
  * @author Michael Yakimenko (Mixail912@gmail.com)
