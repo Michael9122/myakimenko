@@ -6,17 +6,19 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
+/**
+ * @author Michael Yakimenko (Mixail912@gmail.com)
+ * @since 19.12.2018
+ * @version 1
+ */
 public class UserStorageTest {
 
-    UserStorage storage;
-    User userOne;
-    User userTwo;
+    private UserStorage storage = new UserStorage();
+    private User userOne = new User(1, 100);
+    private User userTwo = new User(2, 200);
 
     @Before
     public void setUp() {
-        storage = new UserStorage();
-        userOne = new User(1, 100);
-        userTwo = new User(2, 200);
         storage.add(userOne);
         storage.add(userTwo);
     }
