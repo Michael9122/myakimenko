@@ -17,29 +17,20 @@ public class SimpleBlockingQueue<T> {
     @GuardedBy("this")
     private Queue<T> queue = new LinkedList<>();
 
-    public void offer(T value) {
+    public void offer(T value) throws InterruptedException {
         synchronized (this) {
             while (queue.size() >= 3) {
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                wait();
             }
             queue.offer(value);
             notify();
         }
     }
 
-    public T poll() {
+    public T poll() throws InterruptedException {
         synchronized (this) {
             while (queue.isEmpty()) {
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
+                wait();
             }
             notify();
             return queue.poll();
