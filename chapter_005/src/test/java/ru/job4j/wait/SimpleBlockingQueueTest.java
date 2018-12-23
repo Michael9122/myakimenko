@@ -12,11 +12,11 @@ public class SimpleBlockingQueueTest {
     @Test
     public void test() throws InterruptedException {
         SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>();
-
         Thread producer = new Thread(() -> {
             for (int i = 1; i <= 10; i++) {
                 try {
                     queue.offer(i);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -27,13 +27,13 @@ public class SimpleBlockingQueueTest {
             for (int i = 1; i <= 10; i++) {
                 try {
                     queue.poll();
+                    Thread.sleep(1);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 System.out.println(String.format("%s достал %s", Thread.currentThread().getName(), i));
             }
         });
-
         producer.start();
         consumer.start();
         producer.join();
