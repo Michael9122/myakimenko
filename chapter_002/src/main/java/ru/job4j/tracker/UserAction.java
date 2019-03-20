@@ -1,4 +1,4 @@
-package ru.job4j.tracker;
+package ru.job4j.Tracker;
 
 /**
  * @author Michael Yakimenko (Mixail912@gmail.com)

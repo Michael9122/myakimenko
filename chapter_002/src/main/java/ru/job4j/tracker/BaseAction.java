@@ -1,4 +1,4 @@
-package ru.job4j.tracker;
+package ru.job4j.Tracker;
 
 public abstract class BaseAction implements UserAction {
     private final int key;
