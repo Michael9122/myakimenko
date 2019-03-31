@@ -1,0 +1,55 @@
+create table body (
+	id serial primary key,
+	name varchar
+);
+
+create table engine (
+	id serial primary key,
+	name varchar
+);
+
+create table transmission (
+	id serial primary key,
+	name varchar
+);
+
+create table car (
+	id serial primary key,
+	name varchar,
+	id_body int references body(id),
+	id_engine int references engine(id),
+	id_transmission int references transmission(id)
+)
+
+insert into body (name) values
+('AE101'),
+('AE110'),
+('AE86');
+
+insert into engine (name) values
+('4a-fe'),
+('1jz-ge'),
+('4a-ge'),
+('7a-fe');
+
+insert into transmission (name) values
+('3180LE'),
+('A245E');
+
+insert into car (name, id_body, id_engine, id_transmission) values
+('Sprinter marino', 1, 3, 2),
+('Mark 2', 2, 2, 1);
+
+select c.name, b.name, e.name, t.name from car as c
+inner join body as b on c.id_body = b.id
+inner join engine as e on c.id_engine = e.id
+inner join transmission as t on c.id_transmission = t.id
+
+select b.name from body as b
+left join car as c on c.id_body = b.id where c.name is null;
+
+select e.name from engine as e
+left join car as c on c.id_engine = e.id where c.name is null;
+
+select t.name from transmission as t
+left join car as c on c.id_transmission = t.id where c.name is null;
