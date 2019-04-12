@@ -195,13 +195,13 @@ public class TrackerSQL implements ITracker, AutoCloseable {
      * Метод создает таблицу, если такой таблицы еще нет.
      */
     private void checkTable(Statement st) {
-        String sql = "create table if not exists items (" +
-                "id varchar primary key, " +
-                "name varchar," +
-                "description varchar," +
-                "created double precision," +
-                "comments text" +
-                ");";
+        String sql = "create table if not exists items ("
+                + "id varchar primary key, "
+                + "name varchar,"
+                + "description varchar,"
+                + "created double precision,"
+                + "comments text"
+                + ");";
         try {
             st.executeUpdate(sql);
         } catch (SQLException e) {
