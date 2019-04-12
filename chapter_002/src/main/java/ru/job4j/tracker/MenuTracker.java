@@ -11,10 +11,10 @@ import java.util.List;
 public class MenuTracker {
 
     private Input input;
-    private Tracker tracker;
+    private ITracker tracker;
     private List<UserAction> actions = new ArrayList<>();
 
-    public MenuTracker(Input input, Tracker tracker) {
+    public MenuTracker(Input input, ITracker tracker) {
         this.input = input;
         this.tracker = tracker;
     }
@@ -54,7 +54,7 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             String name = input.ask("Enter name:");
             String desc = input.ask("Enter description:");
             tracker.add(new Item(name, desc));
@@ -69,7 +69,7 @@ public class MenuTracker {
             super(key, name);
         }
 
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             for (Item item : tracker.findAll()) {
                 System.out.println(String.format("%s. %s", item.getId(), item.getName()));
             }
@@ -84,7 +84,7 @@ public class MenuTracker {
             super(key, name);
         }
 
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             String id = input.ask("Please, enter the task's id: ");
             String name = input.ask("Please, enter the new task's name: ");
             String desc = input.ask("Please, enter the new task's description: ");
@@ -100,7 +100,7 @@ public class MenuTracker {
             super(key, name);
         }
 
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             String id = input.ask("Please, enter the task's id: ");
             tracker.delete(id);
         }
@@ -114,7 +114,7 @@ public class MenuTracker {
             super(key, name);
         }
 
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             String id = input.ask("Please, enter the task's id: ");
             Item item = tracker.findById(id);
             System.out.println(String.format("%s. %s", item.getId(), item.getName()));
@@ -129,7 +129,7 @@ public class MenuTracker {
             super(key, name);
         }
 
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             String name = input.ask("Please, enter the task's name: ");
             for (Item item1 : tracker.findByName(name)) {
                 System.out.println(String.format("%s. %s", item1.getId(), item1.getName()));
@@ -145,7 +145,7 @@ public class MenuTracker {
             super(key, name);
         }
 
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
 
         }
     }

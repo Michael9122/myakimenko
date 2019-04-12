@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.Random;
+
 /**
  * @author Michael Yakimenko (Mixail912@gmail.com)
  * @since 22.02.2018
@@ -15,6 +17,8 @@ public class Item {
     private long created;
 
     private String[] comments;
+
+    private static final Random RND = new Random();
 
     public Item() {
     }
@@ -52,5 +56,9 @@ public class Item {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String generateId() {
+        return String.valueOf(System.currentTimeMillis() + RND.nextInt(100));
     }
 }
