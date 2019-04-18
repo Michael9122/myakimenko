@@ -19,14 +19,14 @@ public class TrackerSQL implements ITracker, AutoCloseable {
 
     private Connection connection;
 
-    public TrackerSQL() {
-        init();
+    public TrackerSQL(Connection connection) {
+        this.connection = connection;
     }
 
     /**
      * Подключение к базе данных.
      */
-    private boolean init() {
+    public boolean init() {
         try (InputStream in = TrackerSQL.class.getClassLoader().getResourceAsStream("app.properties")) {
             Properties config = new Properties();
             config.load(in);
@@ -55,7 +55,12 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     @Override
     public Item add(Item item) {
         String sql = "insert into items (id, name, description, created, comments) values (?, ?, ?, ?, ?)";
-        try (PreparedStatement statement = this.connection.prepareStatement(sql);) {
+        try {
+            checkTable(this.connection.createStatement());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try (PreparedStatement statement = this.connection.prepareStatement(sql)) {
             statement.setString(1, item.generateId());
             statement.setString(2, item.getName());
             statement.setString(3, item.getDesc());
@@ -182,7 +187,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     /**
      * Метод создает таблицу, если такой таблицы еще нет.
      */
-    private void checkTable(Statement st) {
+    public void checkTable(Statement st) {
         String sql = "create table if not exists items ("
                 + "id varchar primary key, "
                 + "name varchar,"
