@@ -17,6 +17,7 @@ public class StoreSQL implements AutoCloseable {
 
     public StoreSQL(Config config) {
         this.config = config;
+        config.init();
     }
 
     /**
@@ -26,15 +27,15 @@ public class StoreSQL implements AutoCloseable {
      */
     public void generate(int size) throws Exception {
         try {
-            config.init();
             connect = DriverManager.getConnection(config.get("url"));
             connect.setAutoCommit(false);
             Statement st = connect.createStatement();
-            st.executeUpdate("drop table if exists entry");
             st.executeUpdate("create table if not exists entry (field integer)");
+            st.executeUpdate("delete from entry");
             for (int i = 1; i <= size; i++) {
-                st.executeUpdate("insert into entry (field) values (" + i + ")");
+                st.addBatch("insert into entry (field) values (" + i + ")");
             }
+            st.executeBatch();
             connect.commit();
         } catch (Exception e) {
             e.printStackTrace();
