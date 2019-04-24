@@ -51,7 +51,6 @@ public class StoreSQL implements AutoCloseable {
     public List<Entry> load() {
         List<Entry> result = new ArrayList<>();
         try {
-            config.init();
             connect = DriverManager.getConnection(config.get("url"));
             Statement st = connect.createStatement();
             ResultSet rs = st.executeQuery("select * from entry");
