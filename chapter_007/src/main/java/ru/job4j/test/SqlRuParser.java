@@ -18,7 +18,10 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author Michael Yakimenko (Mixail912@gmail.com)
@@ -38,6 +41,8 @@ public class SqlRuParser implements AutoCloseable, Job {
     private final SimpleDateFormat format = new SimpleDateFormat("dd MMM yy");
 
     private final Date lastDate = format.parse("01 January 19");
+
+    private LocalDate localDate = LocalDate.now();
 
     public SqlRuParser() throws ParseException {
         init();
@@ -73,23 +78,37 @@ public class SqlRuParser implements AutoCloseable, Job {
             Elements trElements = document.body().attr("table", "forumTable").select("tr");
             for (Element trElement : trElements) {
                 String title = trElement.attr("td", "postslisttopic").select("a").text().split("\\[")[0];
-                if (title.toLowerCase().contains("java") && !title.toLowerCase().contains("java script") && !title.toLowerCase().contains("javascript")) {
+                if (checkVacancyName(title)) {
                     String date = trElement.select("td.altCol").last().text();
                     String url = trElement.attr("td", "postslisttopic").select("a").attr("href");
                     Document doc = Jsoup.connect(url).get();
                     Element element = doc.getElementsByAttributeValue("class", "msgBody").get(1);
                     String text = lineBreak(element.html());
-                    if (!dateConverter(date)) {
+                    if (checkDateFromBase().getTime() >= dateConverter(date)) {
                         search = false;
                         break;
                     }
-                    articleList.add(new Article(title, url, text));
-                    articleList.forEach(article -> add(article));
+                    articleList.add(new Article(title, url, text, dateConverter(date)));
                 }
             }
-            articleList.forEach(System.out::println);
             page++;
         }
+        for (Article article : articleList) {
+            add(article);
+        }
+        articleList.forEach(System.out::println);
+    }
+
+    private boolean checkVacancyName(String text) {
+        Pattern pattern = Pattern.compile("(^|.+)((J|j)ava|JAVA).+");
+        Matcher matcher = pattern.matcher(text);
+        Pattern pattern1 = Pattern.compile("(^|.+)(S|s)cript.+");
+        Matcher matcher1 = pattern1.matcher(text);
+        boolean result = false;
+        if (matcher.matches() && !matcher1.matches()) {
+            result = true;
+        }
+        return result;
     }
 
     /**
@@ -111,11 +130,10 @@ public class SqlRuParser implements AutoCloseable, Job {
 
     /**
      * Метод для преобразования String в Date.
-     *
      * @param date дата.
      * @return дату в формате Date.
      */
-    private boolean dateConverter(String date) throws ParseException {
+    private long dateConverter(String date) throws ParseException {
         map.put("янв", "January");
         map.put("фев", "February");
         map.put("мар", "March");
@@ -130,77 +148,66 @@ public class SqlRuParser implements AutoCloseable, Job {
         map.put("дек", "December");
 
         boolean booleanResult = false;
-        Date result = null;
-        LocalDate localDate = LocalDate.now();
+        long result;
         if (date.contains("вчера")) {
             LocalDate yesterday = localDate.minusDays(1);
             Date yesterdayDate = Date.from(yesterday.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            result = yesterdayDate;
+            result = yesterdayDate.getTime();
         } else if (date.contains("сегодня")) {
             Date today = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            result = today;
+            result = today.getTime();
         } else {
             String sep = date.split(" ")[1];
             String newDate = date.replace(sep, map.get(sep));
             Date dateOne = format.parse(newDate);
-            result = dateOne;
-        }
-        if (result.after(lastDate)) {
-            booleanResult = true;
-        }
-        return booleanResult;
-    }
-
-    /**
-     * Проверяет совпадение по вакансиям в БД и на сайте.
-     */
-    private boolean checkCopy(Statement st, String title) {
-        boolean result = true;
-        try (ResultSet rs = st.executeQuery("select v.name from vacancy as v")) {
-            while (rs.next()) {
-                String name = rs.getString("name");
-                if (name.equals(title)) {
-                    result = false;
-                }
-            }
-        } catch (SQLException e) {
-            log.error(e.getMessage(), e);
+            result = dateOne.getTime();
         }
         return result;
     }
 
-    /**
-     * Проверяет создана ли БД, если нет, то создает её и добавляет новую вакансию.
-     *
-     * @param article Вакансия.
-     */
-    private void add(Article article) {
+    private Timestamp checkDateFromBase() {
         try {
             createTable(this.connection.createStatement());
-            if (checkCopy(this.connection.createStatement(), article.getName())) {
-                try (PreparedStatement st = this.connection.prepareStatement("insert into vacancy (name, text, link) values (?, ?, ?)")) {
-                    st.setString(1, article.getName());
-                    st.setString(2, article.getText());
-                    st.setString(3, article.getUrl());
-                    st.executeUpdate();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Timestamp dateOnBase = null;
+        String sql = "select max(date) from vacancy;";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                dateOnBase = rs.getTimestamp(1);
             }
+        } catch (SQLException e) {
+            log.error(e.getMessage(), e);
+        }
+        if (dateOnBase == null) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(2019, 0, 1);
+            dateOnBase = new Timestamp(calendar.getTimeInMillis());
+        }
+        return dateOnBase;
+    }
+
+    private void add(Article article) {
+        try (PreparedStatement st = this.connection.prepareStatement("insert into vacancy (name, text, link, date) values (?, ?, ?, ?)")) {
+            st.setString(1, article.getName());
+            st.setString(2, article.getText());
+            st.setString(3, article.getUrl());
+            st.setTimestamp(4, new Timestamp(article.getDate()));
+            st.executeUpdate();
         } catch (SQLException e) {
             log.error(e.getMessage(), e);
         }
     }
 
-    /**
-     * Запрос для создания БД.
-     */
     private void createTable(Statement st) {
         String sql = "create table if not exists vacancy ("
                 + "id serial primary key, "
-                + "name varchar,"
-                + "text text,"
-                + "link varchar"
+                + "name varchar not null unique, "
+                + "text text, "
+                + "link varchar, "
+                + "date timestamp"
                 + ");";
         try {
             st.executeUpdate(sql);
@@ -230,11 +237,21 @@ public class SqlRuParser implements AutoCloseable, Job {
         private String name;
         private String url;
         private String text;
+        private long date;
 
-        public Article(String name, String url, String text) {
+        public Article(String name, String url, String text, long date) {
             this.name = name;
             this.url = url;
             this.text = text;
+            this.date = date;
+        }
+
+        public long getDate() {
+            return date;
+        }
+
+        public void setDate(long date) {
+            this.date = date;
         }
 
         public String getName() {
@@ -263,7 +280,7 @@ public class SqlRuParser implements AutoCloseable, Job {
 
         @Override
         public String toString() {
-            return String.format("%s | %s\n%s\n", name, url, text);
+            return String.format("%s | %s | %s\n%s\n", name, url, date, text);
         }
     }
 }
