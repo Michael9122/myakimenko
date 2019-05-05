@@ -1,6 +1,6 @@
 package ru.job4j.srp;
 
-import ru.job4j.calculator.Calculator;
+import ru.job4j.ocp.TrigonometryCalc;
 
 /**
  * @author Michael Yakimenko (Mixail912@gmail.com)
@@ -11,9 +11,10 @@ public class InteractCalc {
 
     private Input input;
 
-    private Calculator calculator;
+    private TrigonometryCalc calculator;
 
-    public InteractCalc(Input input, Calculator calculator) {
+
+    public InteractCalc(Input input, TrigonometryCalc calculator) {
         this.input = input;
         this.calculator = calculator;
     }
@@ -24,7 +25,7 @@ public class InteractCalc {
         menu.runMenu();
     }
 
-    public static void main(String[] args)  {
-        new InteractCalc(new ValidateInput(new ConsoleInput()), new Calculator()).init();
+    public static void main(String[] args) {
+        new InteractCalc(new ValidateInput(new ConsoleInput()), new TrigonometryCalc()).init();
     }
 }

@@ -1,6 +1,8 @@
 package ru.job4j.srp;
 
-import ru.job4j.calculator.Calculator;
+import ru.job4j.ocp.Cos;
+import ru.job4j.ocp.Sin;
+import ru.job4j.ocp.TrigonometryCalc;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,20 +16,22 @@ public class MenuCalc {
 
     private Input input;
 
-    private Calculator calc;
+    private TrigonometryCalc calc;
 
     private List<UserAction> actions = new ArrayList<>();
 
-    public MenuCalc(Input input, Calculator calc) {
+    public MenuCalc(Input input, TrigonometryCalc calc) {
         this.input = input;
         this.calc = calc;
     }
 
     public void fillActions() {
-        this.actions.add(new Add(1, "Addition"));
-        this.actions.add(new Subtract(2, "Subtraction"));
-        this.actions.add(new Multiple(3, "Multiplication"));
-        this.actions.add(new Div(4, "Division"));
+        this.actions.add(new Add(0, "Addition"));
+        this.actions.add(new Subtract(1, "Subtraction"));
+        this.actions.add(new Multiple(2, "Multiplication"));
+        this.actions.add(new Div(3, "Division"));
+        this.actions.add(new Cos(4, "Cos"));
+        this.actions.add(new Sin(5, "Sin"));
     }
 
     public int getRange() {
@@ -35,7 +39,7 @@ public class MenuCalc {
     }
 
     public void selectAction(int key) {
-        this.actions.get(key - 1).execute(this.input, this.calc);
+        this.actions.get(key).execute(this.input, this.calc);
     }
 
     public void runMenu() {
@@ -63,7 +67,7 @@ public class MenuCalc {
         }
 
         @Override
-        public void execute(Input input, Calculator calculator) {
+        public void execute(Input input, TrigonometryCalc calculator) {
             double first = Double.valueOf(input.ask("Enter first number:"));
             double second = Double.valueOf(input.ask("Enter second number:"));
             calculator.add(first, second);
@@ -77,7 +81,7 @@ public class MenuCalc {
         }
 
         @Override
-        public void execute(Input input, Calculator calculator) {
+        public void execute(Input input, TrigonometryCalc calculator) {
             double first = Double.valueOf(input.ask("Enter first number:"));
             double second = Double.valueOf(input.ask("Enter second number:"));
             calculator.subtract(first, second);
@@ -91,7 +95,7 @@ public class MenuCalc {
         }
 
         @Override
-        public void execute(Input input, Calculator calculator) {
+        public void execute(Input input, TrigonometryCalc calculator) {
             double first = Double.valueOf(input.ask("Enter first number:"));
             double second = Double.valueOf(input.ask("Enter second number:"));
             calculator.multiple(first, second);
@@ -105,7 +109,7 @@ public class MenuCalc {
         }
 
         @Override
-        public void execute(Input input, Calculator calculator) {
+        public void execute(Input input, TrigonometryCalc calculator) {
             double first = Double.valueOf(input.ask("Enter first number:"));
             double second = Double.valueOf(input.ask("Enter second number:"));
             calculator.div(first, second);
