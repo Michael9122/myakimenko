@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ColdStorage extends Decorator {
-    List<Strategy> foodList = new ArrayList<>();
+    private List<Strategy> foodList = new ArrayList<>();
 
     public ColdStorage(Strategy decoratorStrategy) {
         super(decoratorStrategy);

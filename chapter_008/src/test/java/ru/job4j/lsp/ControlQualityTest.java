@@ -48,7 +48,7 @@ public class ControlQualityTest {
     @Test
     public void testWarehouse() {
         controlQuality.setStrategy(warehouse);
-        Food food = new Food("milk", LocalDate.parse("2019-05-12"), LocalDate.parse("2019-05-06"), 500, 100);
+        Food food = new Food("milk", LocalDate.parse("2019-06-12"), LocalDate.parse("2019-05-06"), 500, 100);
         controlQuality.executeStrategy(food);
         assertThat(warehouse.getList().get(0), is(food));
     }
