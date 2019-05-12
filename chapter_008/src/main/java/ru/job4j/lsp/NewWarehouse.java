@@ -19,4 +19,9 @@ public class NewWarehouse extends Warehouse {
     public List getList() {
         return this.foodList;
     }
+
+    @Override
+    public void clear() {
+        foodList.clear();
+    }
 }

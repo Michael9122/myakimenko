@@ -21,6 +21,11 @@ public class ColdStorage extends Decorator {
         return foodList;
     }
 
+    @Override
+    public void clear() {
+        foodList.clear();
+    }
+
     private void setColdStorage() {
         System.out.println("Склад с низкой температурой");
     }

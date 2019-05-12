@@ -13,4 +13,5 @@ public interface Strategy {
 
     List getList();
 
+    void clear();
 }

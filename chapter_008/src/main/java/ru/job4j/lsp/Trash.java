@@ -26,4 +26,9 @@ public class Trash implements Strategy {
     public List getList() {
         return foodList;
     }
+
+    @Override
+    public void clear() {
+        foodList.clear();
+    }
 }

@@ -22,22 +22,6 @@ public class ControlQualityTest {
     private Trash trash = new Trash();
 
     @Test
-    public void testShop() {
-        controlQuality.setStrategy(shop);
-        Food food = new Food("juice", LocalDate.parse("2019-05-10"), LocalDate.parse("2019-05-06"), 500, 100);
-        controlQuality.executeStrategy(food);
-        assertThat(shop.getList().get(0), is(food));
-    }
-
-    @Test
-    public void whenAddToShopThenPriceDiscount() {
-        controlQuality.setStrategy(shop);
-        Food food = new Food("egs", LocalDate.parse("2019-05-12"), LocalDate.parse("2019-05-06"), 500, 100);
-        controlQuality.executeStrategy(food);
-        assertThat(shop.getList().get(0), is(food));
-    }
-
-    @Test
     public void testTrash() {
         controlQuality.setStrategy(trash);
         Food food = new Food("meat", LocalDate.parse("2019-05-05"), LocalDate.parse("2019-05-01"), 500, 100);
