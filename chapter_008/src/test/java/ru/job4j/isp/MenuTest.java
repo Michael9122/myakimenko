@@ -25,31 +25,31 @@ public class MenuTest {
     @Before
     public void setUp() {
         menu = new Menu(new ConsoleInput());
-        menu.addEntry(new MenuEntry("Задача 1", 1) {
+        menu.addEntry(new MenuEntry("Task 1", 1) {
             @Override
             public void run() {
 
             }
         });
-        menu.addEntry(new MenuEntry("Задача 1.1", 2) {
+        menu.addEntry(new MenuEntry("Task 1.1", 2) {
             @Override
             public void run() {
 
             }
         });
-        menu.addEntry(new MenuEntry("Задача 1.1.1", 3) {
+        menu.addEntry(new MenuEntry("Task 1.1.1", 3) {
             @Override
             public void run() {
 
             }
         });
-        menu.addEntry(new MenuEntry("Задача 1.1.2", 3) {
+        menu.addEntry(new MenuEntry("Task 1.1.2", 3) {
             @Override
             public void run() {
 
             }
         });
-        menu.addEntry(new MenuEntry("Задача 1.2", 2) {
+        menu.addEntry(new MenuEntry("Task 1.2", 2) {
             @Override
             public void run() {
 
@@ -68,11 +68,11 @@ public class MenuTest {
         StringBuilder builder = new StringBuilder();
         builder.append("\n"
         + "Menu:\n"
-        + "1) Задача 1\n"
-        + "2)   Задача 1.1\n"
-        + "3)     Задача 1.1.1\n"
-        + "4)     Задача 1.1.2\n"
-        + "5)   Задача 1.2\n"
+        + "1) Task 1\n"
+        + "2)   Task 1.1\n"
+        + "3)     Task 1.1.1\n"
+        + "4)     Task 1.1.2\n"
+        + "5)   Task 1.2\n"
         + "6) Exit\n");
         String result = builder.toString();
         menu.printMenu();

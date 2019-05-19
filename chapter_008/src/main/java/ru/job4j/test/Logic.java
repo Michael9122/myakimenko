@@ -8,22 +8,22 @@ public class Logic {
 
     private String[][] board;
 
-    private final int ROWS;
+    private final int rows;
 
-    private final int COLS;
+    private final int cols;
 
     private String regex = "\\s";
 
     private char player = 'O';
 
-    public Logic(InputOutput inputOutput, Draw showMenu, int ROWS, int COLS) {
+    public Logic(InputOutput inputOutput, Draw showMenu, int rows, int cols) {
         this.inputOutput = inputOutput;
         this.showMenu = showMenu;
-        this.ROWS = ROWS;
-        this.COLS = COLS;
-        this.board = new String[ROWS][COLS];
-        for (int i = 0; i < ROWS; i++) {
-            for (int j = 0; j < COLS; j++) {
+        this.rows = rows;
+        this.cols = cols;
+        this.board = new String[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
                 board[i][j] = " ";
             }
         }
@@ -54,19 +54,19 @@ public class Logic {
 
     private void getPlayer() {
         if (player == 'X') {
-            player = 'O' ;
+            player = 'O';
         } else {
             player = 'X';
         }
     }
 
     private boolean isGameOver() {
-        for (int i = 0; i < ROWS; i++) {
+        for (int i = 0; i < rows; i++) {
             if (!board[i][0].matches(regex) && board[i][0].equals(board[i][1]) && board[i][1].equals(board[i][2])) {
                 return true;
             }
         }
-        for (int j = 0; j < COLS; j++) {
+        for (int j = 0; j < cols; j++) {
             if (!board[0][j].matches(regex) && board[0][j].equals(board[1][j]) && board[1][j].equals(board[2][j])) {
                 return true;
             }
