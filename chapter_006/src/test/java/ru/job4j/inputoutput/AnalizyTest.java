@@ -30,11 +30,6 @@ public class AnalizyTest {
         file = new File("src/main/unavailable.csv");
     }
 
-    @After
-    public void tearDown() {
-        file.delete();
-    }
-
     @Test
     public void whenUseMethodUnavailableThenCreateFileDate() throws IOException {
         analizy.unavailable("src/main/source.log", "src/main/unavailable.csv");
