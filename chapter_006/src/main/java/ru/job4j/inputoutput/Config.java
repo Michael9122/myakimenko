@@ -20,8 +20,10 @@ public class Config {
        try (BufferedReader reader = new BufferedReader(new FileReader(this.path))) {
            String line;
            while ((line = reader.readLine()) != null) {
-               String[] pair = line.split("=");
-                values.put(pair[0], pair[1]);
+               if (line.contains("=")) {
+                   String[] pair = line.split("=");
+                   values.put(pair[0], pair[1]);
+               }
            }
        } catch (FileNotFoundException e) {
            e.printStackTrace();
