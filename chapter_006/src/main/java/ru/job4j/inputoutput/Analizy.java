@@ -1,15 +1,16 @@
 package ru.job4j.inputoutput;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Analizy {
 
     public void unavailable(String source, String target) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(source));
-             PrintWriter out = new PrintWriter(new FileOutputStream(target))
-        ) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(source))) {
             String line;
             String pair = null;
+            List<String> list = new ArrayList<>();
             boolean start = false;
             while ((line = reader.readLine()) != null) {
                 if (line.matches("[45]00.*") && !start) {
@@ -17,13 +18,21 @@ public class Analizy {
                     start = true;
                 }
                 if (line.matches("[23]00.*") && start) {
-                    out.format("%s -> %s%n", pair, line.split("\\s")[1]);
+                    list.add(String.format("%s -> %s%n", pair, line.split("\\s")[1]));
                     start = false;
                 }
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            write(list, target);
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void write(List<String> list, String target) {
+        try (PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
+            list.forEach(i -> out.write(i));
+
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
